@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { BookContext } from "../contexts/BookContext";
 import Book from "./Book";
@@ -9,14 +9,30 @@ const StyledSection = styled.section`
     text-transform: capitalize;
     text-align: center;
   }
+  div {
+    height: 100%;
+    background: pink;
+  }
   ul {
     list-style: none;
     margin: 0;
     padding: 0;
   }
 `;
-const BookList = ({ list }) => {
+const BookList = ({ list, listId }) => {
   const { toRead, inProgress, finished } = useContext(BookContext);
+
+  const drop = (ev, el) => {
+    ev.preventDefault();
+    const data = ev.dataTransfer.getData("text/html");
+    // console.log("drop", data);
+    el.appendChild(document.getElementById(data));
+  };
+
+  const allowDrop = (e) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+  };
 
   let books = [];
   switch (list) {
@@ -33,14 +49,24 @@ const BookList = ({ list }) => {
       books = [];
       console.log("Book List is empty");
   }
+  const dropTarget = document.getElementById(listId);
+  // console.log("el", el);
   return (
     <StyledSection>
       <h2>{list}</h2>
-      <ul>
-        {books.map((book) => (
-          <Book book={book} key={book.id} />
-        ))}
-      </ul>
+      <div
+        onDrop={(e) => {
+          drop(e, dropTarget);
+        }}
+        onDragOver={(e) => allowDrop(e)}
+        id={listId}
+      >
+        <ul>
+          {books.map((book) => (
+            <Book book={book} key={book.id} />
+          ))}
+        </ul>
+      </div>
     </StyledSection>
   );
 };

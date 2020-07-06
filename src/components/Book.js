@@ -5,6 +5,7 @@ import styled from "styled-components";
 const Wrapper = styled.li`
   display: grid;
   padding: 1rem;
+  border: 1px solid green;
 
   button {
     border: none;
@@ -20,8 +21,18 @@ const Wrapper = styled.li`
 `;
 const Book = ({ book }) => {
   const { removeBook } = useContext(BookContext);
+
+  const drag = (e) => {
+    console.log('drag');
+    e.dataTransfer.setData("text/html", e.target.id);
+  };
+
   return (
-    <Wrapper>
+    <Wrapper
+      draggable="true"
+      id={`drag-book-${book.id}`}
+      onDragStart={(e) => drag(e)}
+    >
       <div>
         <h3>{book.title}</h3>
         <p>{book.author}</p>
