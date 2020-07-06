@@ -16,7 +16,23 @@ const StyledSection = styled.section`
   }
 `;
 const BookList = ({ list }) => {
-  const { books } = useContext(BookContext);
+  const { toRead, inProgress, finished } = useContext(BookContext);
+
+  let books = [];
+  switch (list) {
+    case "to read":
+      books = toRead;
+      break;
+    case "in progress":
+      books = inProgress;
+      break;
+    case "finished":
+      books = finished;
+      break;
+    default:
+      books = [];
+      console.log("Book List is empty");
+  }
   return (
     <StyledSection>
       <h2>{list}</h2>

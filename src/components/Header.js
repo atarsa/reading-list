@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { BookContext } from "../contexts/BookContext";
 
 const StyledHeader = styled.header`
   background: ${(props) => props.theme.primaryColor};
@@ -14,10 +15,15 @@ const StyledHeader = styled.header`
 `;
 
 const Header = () => {
+  const { toRead, inProgress, finished } = useContext(BookContext);
   return (
     <StyledHeader className="header">
       <h1>Reading List </h1>
-      <p>You have x books to read, x books in progress and x books finished.</p>
+      <p>
+        You have {toRead.length} book{toRead.length === 1 ? "" : "s"} to read,{" "}
+        {inProgress.length} book{inProgress.length === 1 ? "" : "s"} in progress
+        and {finished.length} book{finished.length === 1 ? "" : "s"} finished.
+      </p>
       <p>
         Keep Reading!{" "}
         <span role="img" aria-label="books">

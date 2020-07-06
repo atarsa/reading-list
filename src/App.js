@@ -31,8 +31,8 @@ function App() {
         <AddBook />
         <BookListWrapper>
           <BookList list="to read" />
-          {/* <BookList list="in progress" />
-          <BookList list="finished" /> */}
+          <BookList list="in progress" />
+          <BookList list="finished" />
         </BookListWrapper>
       </BookContextProvider>
     </Layout>

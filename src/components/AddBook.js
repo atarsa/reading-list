@@ -9,7 +9,8 @@ const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
 
-  input[type="text"] {
+  input[type="text"],
+  select {
     margin-bottom: 2rem;
     padding: 1rem;
   }
@@ -27,18 +28,19 @@ const StyledForm = styled.form`
 const AddBook = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
+  const [status, setStatus] = useState("");
   const { addBook } = useContext(BookContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (title && author) {
-      addBook(title, author);
-      setTitle("");
-      setAuthor("");
-    } else {
-      alert("Author and title can't be empty");
-    }
+    addBook(title, author, status);
+    // TODO show success message
+    // TODO hide form
+    setTitle("");
+    setAuthor("");
+    setStatus("to read");
   };
+
   return (
     <StyledForm onSubmit={handleSubmit}>
       <label htmlFor="title">Title:</label>
@@ -47,7 +49,9 @@ const AddBook = () => {
         name="title"
         id="title"
         placeholder="Title"
+        value={title}
         onChange={(e) => setTitle(e.target.value)}
+        required
       />
       <label htmlFor="author">Author:</label>
       <input
@@ -55,8 +59,21 @@ const AddBook = () => {
         name="author"
         id="author"
         placeholder="Author"
+        value={author}
         onChange={(e) => setAuthor(e.target.value)}
+        required
       />
+      <label htmlFor="status">Reading status:</label>
+      <select
+        name="status"
+        id="status"
+        value={status}
+        onChange={(e) => setStatus(e.target.value)}
+      >
+        <option value="to read">To Read</option>
+        <option value="in progress">In Progress</option>
+        <option value="finished">Finished</option>
+      </select>
       <input type="submit" value="Add a Book" className="button" />
     </StyledForm>
   );
