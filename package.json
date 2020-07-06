@@ -13,7 +13,8 @@
     "styled-normalize": "^8.0.7",
     "typeface-open-sans": "0.0.75",
     "typeface-oswald": "^1.1.4",
-    "typescript": "^3.9.6"
+    "typescript": "^3.9.6",
+    "uuid": "^8.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
