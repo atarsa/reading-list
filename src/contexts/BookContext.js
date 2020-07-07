@@ -8,25 +8,25 @@ const BookContextProvider = (props) => {
       title: "name of the wind",
       author: "Sanderson",
       status: "to read",
-      id: 1,
+      id: uuid(),
     },
     {
       title: "the way of kings",
       author: "Sanderson",
       status: "to read",
-      id: 2,
+      id: uuid(),
     },
     {
       title: "the final empire",
       author: "Sanderson",
       status: "in progress",
-      id: 3,
+      id: uuid(),
     },
     {
       title: "the hero of ages",
       author: "Sanderson",
       status: "finished",
-      id: 4,
+      id: uuid(),
     },
   ]);
 
@@ -50,7 +50,30 @@ const BookContextProvider = (props) => {
     ]);
   };
 
-  const removeBook = (id) => setBooks(books.filter((book) => book.id !== id));
+  const updateBookStatus = (bookId, status) => {
+    
+    // const newBooks = books.map((book) => {
+    //   return book.id === bookId ? { ...book, status: status } : book;
+    // });
+
+    // console.log(newBooks);
+    // setBooks(newBooks);
+    const movedBook = books.filter((book) => book.id === bookId)[0];
+    movedBook.status = status;
+    console.log(movedBook);
+    setBooks(
+      books.map((book) => (book.id === movedBook.id ? movedBook : book))
+    );
+    // remove book from old list
+
+    // update book with new list
+    // update all books??
+  };
+
+  const removeBook = (id) => {
+    console.log("remove book", id);
+    setBooks(books.filter((book) => book.id !== id));
+  };
 
   useEffect(() => {
     setToRead(filterBooks("to read"));
@@ -61,7 +84,16 @@ const BookContextProvider = (props) => {
 
   return (
     <BookContext.Provider
-      value={{ toRead, inProgress, finished, addBook, removeBook }}
+      value={{
+        books,
+        filterBooks,
+        inProgress,
+        toRead,
+        finished,
+        addBook,
+        removeBook,
+        updateBookStatus,
+      }}
     >
       {props.children}
     </BookContext.Provider>

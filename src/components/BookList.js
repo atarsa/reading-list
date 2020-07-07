@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 import { BookContext } from "../contexts/BookContext";
 import Book from "./Book";
@@ -20,20 +20,35 @@ const StyledSection = styled.section`
   }
 `;
 const BookList = ({ list, listId }) => {
-  const { toRead, inProgress, finished } = useContext(BookContext);
+  const { updateBookStatus, toRead, inProgress, finished } = useContext(
+    BookContext
+  );
 
+  const dropTarget = document.getElementById(listId);
+
+  //  drag and drop usage https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API
   const drop = (ev, el) => {
     ev.preventDefault();
-    const data = ev.dataTransfer.getData("text/html");
-    // console.log("drop", data);
+    console.log("drop target element", el);
+    const data = ev.dataTransfer.getData("text");
+    const movedBook = document.getElementById(data);
+    movedBook.style.display = "block";
+
+    // update moved book
+    // get book id
+
+    console.log("moved book", movedBook);
+    const bookId = movedBook.dataset.bookid;
+    // updateBookStatus(bookId, listId);
     el.appendChild(document.getElementById(data));
   };
 
   const allowDrop = (e) => {
     e.preventDefault();
-    e.dataTransfer.dropEffect = "move";
   };
 
+  console.log("list id", listId);
+  console.log(dropTarget);
   let books = [];
   switch (list) {
     case "to read":
@@ -49,16 +64,15 @@ const BookList = ({ list, listId }) => {
       books = [];
       console.log("Book List is empty");
   }
-  const dropTarget = document.getElementById(listId);
-  // console.log("el", el);
   return (
     <StyledSection>
       <h2>{list}</h2>
       <div
         onDrop={(e) => {
+          console.log(dropTarget);
           drop(e, dropTarget);
         }}
-        onDragOver={(e) => allowDrop(e)}
+        onDragOver={allowDrop}
         id={listId}
       >
         <ul>

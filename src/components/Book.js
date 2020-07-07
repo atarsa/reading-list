@@ -23,15 +23,20 @@ const Book = ({ book }) => {
   const { removeBook } = useContext(BookContext);
 
   const drag = (e) => {
-    console.log('drag');
-    e.dataTransfer.setData("text/html", e.target.id);
+    console.log("drag");
+    const target = e.target;
+    e.dataTransfer.setData("text", target.id);
+    setTimeout(() => {
+      target.style.display = "none";
+    }, 0);
   };
 
-  return (
+    return (
     <Wrapper
       draggable="true"
       id={`drag-book-${book.id}`}
-      onDragStart={(e) => drag(e)}
+      onDragStart={drag}
+      data-bookid={book.id}
     >
       <div>
         <h3>{book.title}</h3>
