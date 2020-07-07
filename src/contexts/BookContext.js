@@ -33,6 +33,7 @@ const BookContextProvider = (props) => {
   const [toRead, setToRead] = useState(filterBooks("to read"));
   const [inProgress, setInProgress] = useState(filterBooks("in progress"));
   const [finished, setFinished] = useState(filterBooks("finished"));
+  const [draggedBook, setDraggedBook] = useState({});
 
   function filterBooks(status) {
     return books.filter((book) => book.status === status);
@@ -50,24 +51,16 @@ const BookContextProvider = (props) => {
     ]);
   };
 
-  const updateBookStatus = (bookId, status) => {
-    
-    // const newBooks = books.map((book) => {
-    //   return book.id === bookId ? { ...book, status: status } : book;
-    // });
-
-    // console.log(newBooks);
-    // setBooks(newBooks);
-    const movedBook = books.filter((book) => book.id === bookId)[0];
-    movedBook.status = status;
-    console.log(movedBook);
+  const updateBooks = (bookId, status) => {
     setBooks(
-      books.map((book) => (book.id === movedBook.id ? movedBook : book))
+      books.map((book) =>
+        book.id === bookId ? { ...book, status: status } : book
+      )
     );
-    // remove book from old list
 
-    // update book with new list
-    // update all books??
+    setToRead(filterBooks("to read"));
+    setInProgress(filterBooks("in progress"));
+    setFinished(filterBooks("finished"));
   };
 
   const removeBook = (id) => {
@@ -75,24 +68,24 @@ const BookContextProvider = (props) => {
     setBooks(books.filter((book) => book.id !== id));
   };
 
-  useEffect(() => {
-    setToRead(filterBooks("to read"));
-    setInProgress(filterBooks("in progress"));
-    setFinished(filterBooks("finished"));
-    // eslint-disable-next-line
-  }, [books]);
+  // useEffect(() => {
+  //   // setToRead(filterBooks("to read"));
+  //   // setInProgress(filterBooks("in progress"));
+  //   // setFinished(filterBooks("finished"));
+  //   // eslint-disable-next-line
+  // }, [books]);
 
   return (
     <BookContext.Provider
       value={{
-        books,
-        filterBooks,
         inProgress,
         toRead,
         finished,
         addBook,
         removeBook,
-        updateBookStatus,
+        draggedBook,
+        setDraggedBook,
+        updateBooks,
       }}
     >
       {props.children}

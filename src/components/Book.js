@@ -20,22 +20,23 @@ const Wrapper = styled.li`
   }
 `;
 const Book = ({ book }) => {
-  const { removeBook } = useContext(BookContext);
+  const { removeBook, setDraggedBook } = useContext(BookContext);
 
-  const drag = (e) => {
+  const drag = (e, bookToDrag) => {
     console.log("drag");
-    const target = e.target;
-    e.dataTransfer.setData("text", target.id);
-    setTimeout(() => {
-      target.style.display = "none";
-    }, 0);
+    setDraggedBook(bookToDrag);
+    // const target = e.target;
+    // e.dataTransfer.setData("text", target.id);
+    // setTimeout(() => {
+    //   target.style.display = "none";
+    // }, 0);
   };
 
-    return (
+  return (
     <Wrapper
       draggable="true"
       id={`drag-book-${book.id}`}
-      onDragStart={drag}
+      onDragStart={(e) => drag(e, book)}
       data-bookid={book.id}
     >
       <div>
