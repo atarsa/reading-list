@@ -28,7 +28,7 @@ const StyledForm = styled.form`
 const AddBook = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState("to read");
   const { addBook } = useContext(BookContext);
 
   const handleSubmit = (e) => {
