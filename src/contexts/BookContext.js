@@ -43,7 +43,6 @@ const BookContextProvider = (props) => {
   };
 
   const removeBook = (id) => {
-    console.log("remove book", id);
     setBooks(books.filter((book) => book.id !== id));
   };
 

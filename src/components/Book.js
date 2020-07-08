@@ -25,6 +25,14 @@ const Wrapper = styled.li`
 const Book = ({ book }) => {
   const { removeBook, setDraggedBook } = useContext(BookContext);
 
+  const handleRemove = (book) => {
+    const confirmation = window.confirm(
+      "Are you sure you want to delete this book?"
+    );
+    if (confirmation) {
+      removeBook(book.id);
+    }
+  };
   const drag = (e, bookToDrag) => {
     console.log("drag");
     setDraggedBook(bookToDrag);
@@ -47,7 +55,7 @@ const Book = ({ book }) => {
         <p>{book.author}</p>
       </div>
 
-      <button onClick={() => removeBook(book.id)}>Delete </button>
+      <button onClick={() => handleRemove(book)}>Delete </button>
     </Wrapper>
   );
 };
