@@ -9,8 +9,11 @@ require("typeface-open-sans");
 const GlobalStyle = createGlobalStyle`
   html{
     font-size: 62.5%; /* Now 10px = 1rem! */
+    
   }
   body{
+    background: ${(props) => props.theme.primaryLighter};
+    height: 100%;
     font-family: 'Open Sans', sans-serif;
     font-size: 16px; /* px fallback */
     font-size: 1.6rem; /* default font-size for document */

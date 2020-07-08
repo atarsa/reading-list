@@ -5,17 +5,20 @@ import styled from "styled-components";
 const Wrapper = styled.li`
   display: grid;
   padding: 1rem;
-  border: 1px solid green;
+  margin-bottom: 1rem;
+  background: ${(props) => props.theme.primaryLight};
 
   button {
     border: none;
-    background: ${(props) => props.theme.primaryColor};
+    background: ${(props) => props.theme.secondaryColor};
+    color: ${(props) => props.theme.additionalColor};
+    font-weight: 600;
     padding: 0.5rem 2rem;
 
     :hover {
       cursor: pointer;
       color: #fff;
-      background: ${(props) => props.theme.secondaryColor};
+      background: ${(props) => props.theme.primaryColor};
     }
   }
 `;
@@ -44,7 +47,7 @@ const Book = ({ book }) => {
         <p>{book.author}</p>
       </div>
 
-      <button onClick={() => removeBook(book.id)}>x </button>
+      <button onClick={() => removeBook(book.id)}>Delete </button>
     </Wrapper>
   );
 };

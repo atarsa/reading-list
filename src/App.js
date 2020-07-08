@@ -6,13 +6,14 @@ import BookContextProvider from "./contexts/BookContext";
 import Header from "./components/Header";
 import BookList from "./components/BookList";
 import AddBook from "./components/AddBook";
+import { ReactComponent as Ilustration } from "./images/undraw_book_lover_mkck.svg";
 
 const BookListWrapper = styled.div`
-  max-width: ${(props) => props.theme.maxWidth};
-  margin: 0 auto;
-  padding: 2rem;
+  margin: 2rem;
+  padding: 2rem 0;
   display: grid;
   grid-template-columns: 1fr;
+  grid-template-rows: repat(minmax(300px, max-content), auto);
   grid-gap: 2rem;
 
   @media (min-width: ${(props) => props.theme.breakpoints.medium}) {
@@ -23,17 +24,39 @@ const BookListWrapper = styled.div`
     grid-template-columns: 1fr 1fr 1fr;
   }
 `;
+
+const Container = styled.div`
+  max-width: ${(props) => props.theme.maxWidth};
+  margin: 5rem auto 0;
+`;
+
+const StyledIlustration = styled(Ilustration)`
+  display: none;
+
+  @media (min-width: ${(props) => props.theme.breakpoints.medium}) {
+    display: block;
+    position: absolute;
+    top: 3.5rem;
+    right: 2rem;
+    z-index: 0;
+    width: 280px;
+    height: 280px;
+  }
+`;
 function App() {
   return (
     <Layout>
       <BookContextProvider>
         <Header />
-        <AddBook />
-        <BookListWrapper>
-          <BookList list="to read" listId="toRead" />
-          <BookList list="in progress" listId="inProgress" />
-          <BookList list="finished" listId="finished" />
-        </BookListWrapper>
+        <StyledIlustration />
+        <Container>
+          <AddBook />
+          <BookListWrapper>
+            <BookList list="to read" listId="toRead" />
+            <BookList list="in progress" listId="inProgress" />
+            <BookList list="finished" listId="finished" />
+          </BookListWrapper>
+        </Container>
       </BookContextProvider>
     </Layout>
   );

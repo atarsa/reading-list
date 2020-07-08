@@ -22,60 +22,92 @@ const StyledForm = styled.form`
     background: ${(props) => props.theme.additionalColor};
     border: none;
     padding: 1rem 2rem;
+    font-weight: 700;
+    cursor: pointer;
+
+    :hover {
+      color: #fff;
+    }
   }
 `;
 
+const StyledBtn = styled.button`
+  padding: 1rem 2rem;
+  margin: 2rem;
+  background: ${(props) => props.theme.secondaryColor};
+  border: none;
+  color: ${(props) => props.theme.additionalColor};
+  font-weight: 700;
+  cursor: pointer;
+
+  :hover {
+    color: #fff;
+  }
+`;
 const AddBook = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [status, setStatus] = useState("to read");
+  const [isOpen, setIsOpen] = useState(false);
   const { addBook } = useContext(BookContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     addBook(title, author, status);
-    // TODO show success message
-    // TODO hide form
+    setIsOpen(false);
     setTitle("");
     setAuthor("");
     setStatus("to read");
   };
 
+  const showOrHide = () => setIsOpen(!isOpen);
+
   return (
-    <StyledForm onSubmit={handleSubmit}>
-      <label htmlFor="title">Title:</label>
-      <input
-        type="text"
-        name="title"
-        id="title"
-        placeholder="Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-        required
-      />
-      <label htmlFor="author">Author:</label>
-      <input
-        type="text"
-        name="author"
-        id="author"
-        placeholder="Author"
-        value={author}
-        onChange={(e) => setAuthor(e.target.value)}
-        required
-      />
-      <label htmlFor="status">Reading status:</label>
-      <select
-        name="status"
-        id="status"
-        value={status}
-        onChange={(e) => setStatus(e.target.value)}
-      >
-        <option value="to read">To Read</option>
-        <option value="in progress">In Progress</option>
-        <option value="finished">Finished</option>
-      </select>
-      <input type="submit" value="Add a Book" className="button" />
-    </StyledForm>
+    <>
+      <StyledBtn onClick={showOrHide}> Add a book</StyledBtn>
+      {isOpen && (
+        <div>
+          <button className="close-btn" aria-label="Close" onClick={showOrHide}>
+            X
+          </button>
+          <StyledForm onSubmit={handleSubmit}>
+            <label htmlFor="title">Title:</label>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              placeholder="Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+            />
+            <label htmlFor="author">Author:</label>
+            <input
+              type="text"
+              name="author"
+              id="author"
+              placeholder="Author"
+              value={author}
+              onChange={(e) => setAuthor(e.target.value)}
+              required
+            />
+            <label htmlFor="status">Reading status:</label>
+            <select
+              name="status"
+              id="status"
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+            >
+              <option value="to read">To Read</option>
+              <option value="in progress">In Progress</option>
+              <option value="finished">Finished</option>
+            </select>
+
+            <input type="submit" value="Add a Book" className="button" />
+          </StyledForm>
+        </div>
+      )}
+    </>
   );
 };
 

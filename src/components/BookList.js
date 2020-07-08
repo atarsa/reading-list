@@ -4,19 +4,27 @@ import { BookContext } from "../contexts/BookContext";
 import Book from "./Book";
 
 const StyledSection = styled.section`
-  border: 1px solid ${(props) => props.theme.additionalColor};
+  background: ${(props) => props.theme.primaryLight};
+  margin-bottom: 2rem;
+  /* display: flex;
+  flex-direction: column; */
+
+  .list-head {
+    background: ${(props) => props.theme.primaryColor};
+    padding: 0.2rem;
+  }
   h2 {
     text-transform: capitalize;
     text-align: center;
   }
-  div {
+  .list-body {
+    /* background: ${(props) => props.theme.primaryLight}; */
     height: 100%;
-    background: pink;
   }
   ul {
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 1rem;
   }
 `;
 const BookList = ({ list }) => {
@@ -50,15 +58,21 @@ const BookList = ({ list }) => {
       books = [];
       console.log("Book List is empty");
   }
+
+  const booksToShow =
+    books.length !== 0 ? (
+      books.map((book) => <Book book={book} key={book.id} />)
+    ) : (
+      <p>List is empty!</p>
+    );
   return (
     <StyledSection>
-      <h2>{list}</h2>
-      <div onDrop={drop} onDragOver={allowDrop}>
-        <ul>
-          {books.map((book) => (
-            <Book book={book} key={book.id} />
-          ))}
-        </ul>
+      <div className="list-head">
+        <h2>{list}</h2>
+      </div>
+
+      <div onDrop={drop} onDragOver={allowDrop} className="list-body">
+        <ul>{booksToShow}</ul>
       </div>
     </StyledSection>
   );
