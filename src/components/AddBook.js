@@ -2,12 +2,14 @@ import React, { useState, useContext } from "react";
 import { BookContext } from "../contexts/BookContext";
 import styled from "styled-components";
 
+import Modal from "react-modal";
 const StyledForm = styled.form`
-  margin: 0 auto;
-  max-width: 600px;
+  /* position: relative; */
+  width: 600px;
   padding: 2rem;
-  display: flex;
-  flex-direction: column;
+  margin: 3rem auto;
+  display: grid;
+  background: #fff;
 
   input[type="text"],
   select {
@@ -20,6 +22,7 @@ const StyledForm = styled.form`
   }
   .button {
     background: ${(props) => props.theme.additionalColor};
+    color: ${(props) => props.theme.secondaryColor};
     border: none;
     padding: 1rem 2rem;
     font-weight: 700;
@@ -27,7 +30,12 @@ const StyledForm = styled.form`
 
     :hover {
       color: #fff;
+      background: ${(props) => props.theme.primaryColor};
     }
+  }
+
+  .button--close {
+    justify-self: end;
   }
 `;
 
@@ -44,6 +52,18 @@ const StyledBtn = styled.button`
     color: #fff;
   }
 `;
+
+const StyledModal = styled(Modal)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+`;
 const AddBook = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -51,63 +71,75 @@ const AddBook = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { addBook } = useContext(BookContext);
 
+  Modal.setAppElement("#root");
+
   const handleSubmit = (e) => {
     e.preventDefault();
     addBook(title, author, status);
-    setIsOpen(false);
+    showOrHide();
     setTitle("");
     setAuthor("");
     setStatus("to read");
   };
 
-  const showOrHide = () => setIsOpen(!isOpen);
+  const showOrHide = () => {
+    setIsOpen(!isOpen);
+    const rootDiv = document.querySelector("#root");
+    rootDiv.classList.toggle("blur");
+  };
 
   return (
-    <>
+    <div>
       <StyledBtn onClick={showOrHide}> Add a book</StyledBtn>
-      {isOpen && (
-        <div>
-          <button className="close-btn" aria-label="Close" onClick={showOrHide}>
+      <StyledModal isOpen={isOpen} onRequestClose={showOrHide}>
+        <StyledForm onSubmit={handleSubmit} autoComplete="off">
+          <button
+            className="button button--close"
+            aria-label="Close"
+            onClick={showOrHide}
+          >
             X
           </button>
-          <StyledForm onSubmit={handleSubmit}>
-            <label htmlFor="title">Title:</label>
-            <input
-              type="text"
-              name="title"
-              id="title"
-              placeholder="Title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-            />
-            <label htmlFor="author">Author:</label>
-            <input
-              type="text"
-              name="author"
-              id="author"
-              placeholder="Author"
-              value={author}
-              onChange={(e) => setAuthor(e.target.value)}
-              required
-            />
-            <label htmlFor="status">Reading status:</label>
-            <select
-              name="status"
-              id="status"
-              value={status}
-              onChange={(e) => setStatus(e.target.value)}
-            >
-              <option value="to read">To Read</option>
-              <option value="in progress">In Progress</option>
-              <option value="finished">Finished</option>
-            </select>
+          <label htmlFor="title">Title:</label>
+          <input
+            key="book-title"
+            type="text"
+            name="title"
+            id="title"
+            placeholder="Title"
+            value={title}
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
+            required
+          />
+          <label htmlFor="author">Author:</label>
+          <input
+            key="book-author"
+            type="text"
+            name="author"
+            id="author"
+            placeholder="Author"
+            value={author}
+            onChange={(e) => setAuthor(e.target.value)}
+            required
+          />
+          <label htmlFor="status">Reading status:</label>
+          <select
+            name="status"
+            id="status"
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+          >
+            <option value="to read">To Read</option>
+            <option value="in progress">In Progress</option>
+            <option value="finished">Finished</option>
+          </select>
 
-            <input type="submit" value="Add a Book" className="button" />
-          </StyledForm>
-        </div>
-      )}
-    </>
+          <input type="submit" value="Add a Book" className="button" />
+        </StyledForm>
+      </StyledModal>
+    </div>
   );
 };
 

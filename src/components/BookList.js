@@ -6,9 +6,7 @@ import Book from "./Book";
 const StyledSection = styled.section`
   background: ${(props) => props.theme.primaryLight};
   margin-bottom: 2rem;
-  /* display: flex;
-  flex-direction: column; */
-
+  
   .list-head {
     background: ${(props) => props.theme.primaryColor};
     padding: 0.2rem;
@@ -18,7 +16,7 @@ const StyledSection = styled.section`
     text-align: center;
   }
   .list-body {
-    /* background: ${(props) => props.theme.primaryLight}; */
+    
     height: 100%;
   }
   ul {

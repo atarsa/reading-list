@@ -13,7 +13,6 @@ const GlobalStyle = createGlobalStyle`
   }
   body{
     background: ${(props) => props.theme.primaryLighter};
-    height: 100%;
     font-family: 'Open Sans', sans-serif;
     font-size: 16px; /* px fallback */
     font-size: 1.6rem; /* default font-size for document */
@@ -29,6 +28,11 @@ const GlobalStyle = createGlobalStyle`
 
   *, *::before, *::after{
     box-sizing: border-box;
+  }
+
+  .blur{
+    filter: blur(10px)
+
   }
  
 `;
