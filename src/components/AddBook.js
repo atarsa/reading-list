@@ -4,12 +4,11 @@ import styled from "styled-components";
 
 import Modal from "react-modal";
 const StyledForm = styled.form`
-  /* position: relative; */
   width: 600px;
   padding: 2rem;
   margin: 3rem auto;
   display: grid;
-  background: #fff;
+  background: #eee;
 
   input[type="text"],
   select {
@@ -17,12 +16,12 @@ const StyledForm = styled.form`
     padding: 1rem;
   }
   label {
-    color: ${(props) => props.theme.secondaryColor};
+    color: #052340;
     font-weight: 600;
   }
   .button {
-    background: ${(props) => props.theme.additionalColor};
-    color: ${(props) => props.theme.secondaryColor};
+    background: #052340;
+    color: #d5ac4e;
     border: none;
     padding: 1rem 2rem;
     font-weight: 700;
@@ -30,7 +29,7 @@ const StyledForm = styled.form`
 
     :hover {
       color: #fff;
-      background: ${(props) => props.theme.primaryColor};
+      background: ${(props) => props.theme.additionalColor};
     }
   }
 
@@ -42,13 +41,14 @@ const StyledForm = styled.form`
 const StyledBtn = styled.button`
   padding: 1rem 2rem;
   margin: 2rem;
-  background: ${(props) => props.theme.secondaryColor};
+  background: ${(props) => props.theme.primaryColor};
   border: none;
-  color: ${(props) => props.theme.additionalColor};
+  color: ${(props) => props.theme.secondaryColor};
   font-weight: 700;
   cursor: pointer;
 
   :hover {
+    background: ${(props) => props.theme.additionalColor};
     color: #fff;
   }
 `;

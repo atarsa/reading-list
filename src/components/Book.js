@@ -10,15 +10,15 @@ const Wrapper = styled.li`
 
   button {
     border: none;
-    background: ${(props) => props.theme.secondaryColor};
-    color: ${(props) => props.theme.additionalColor};
+    background: ${(props) => props.theme.primaryColor};
+    color: ${(props) => props.theme.secondaryColor};
     font-weight: 600;
     padding: 0.5rem 2rem;
 
     :hover {
       cursor: pointer;
       color: #fff;
-      background: ${(props) => props.theme.primaryColor};
+      background: ${(props) => props.theme.additionalColor};
     }
   }
 `;

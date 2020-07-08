@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { BookContext } from "../contexts/BookContext";
-
+import { useTheme } from "../layout/Layout";
 const StyledHeader = styled.header`
   background: ${(props) => props.theme.primaryColor};
   color: ${(props) => props.theme.secondaryColor};
@@ -25,6 +25,7 @@ const StyledHeader = styled.header`
 
 const Header = () => {
   const { toRead, inProgress, finished } = useContext(BookContext);
+  const themeToggle = useTheme();
   return (
     <StyledHeader className="header">
       <div className="container">
@@ -42,6 +43,7 @@ const Header = () => {
           </span>
         </p>
       </div>
+      <button onClick={themeToggle.toggle}>Toggle Theme</button>
     </StyledHeader>
   );
 };

@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState, createContext, useContext } from "react";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { Normalize } from "styled-normalize";
-import { theme } from "../styles/theme";
+import { lightTheme, darkTheme } from "../styles/theme";
 // Load typeface
 require("typeface-oswald");
 require("typeface-open-sans");
 
+const ThemeToggleContext = createContext();
+
+export const useTheme = () => useContext(ThemeToggleContext);
 const GlobalStyle = createGlobalStyle`
   html{
     font-size: 62.5%; /* Now 10px = 1rem! */
@@ -36,17 +39,23 @@ const GlobalStyle = createGlobalStyle`
   }
  
 `;
-const StyledWrapper = styled.div`
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
-`;
-const Layout = ({ children }) => (
-  <ThemeProvider theme={theme}>
-    <Normalize />
-    <GlobalStyle />
-    <StyledWrapper>{children}</StyledWrapper>
-  </ThemeProvider>
-);
+const StyledWrapper = styled.div``;
+const Layout = ({ children }) => {
+  const [isLightTheme, setIsLightTheme] = useState(true);
+
+  const toggle = () => {
+    setIsLightTheme(!isLightTheme)
+  }
+  const theme = isLightTheme ? lightTheme : darkTheme;
+  return (
+    <ThemeToggleContext.Provider value={{toggle}}>
+      <ThemeProvider theme={theme}>
+        <Normalize />
+        <GlobalStyle />
+        <StyledWrapper>{children}</StyledWrapper>
+      </ThemeProvider>
+    </ThemeToggleContext.Provider>
+  );
+};
 
 export default Layout;
