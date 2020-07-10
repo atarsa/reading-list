@@ -1,5 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import { v1 as uuid } from "uuid";
+import { getBookCover } from "../services/books";
+
 export const BookContext = createContext();
 
 const BookContextProvider = (props) => {
@@ -22,13 +24,15 @@ const BookContextProvider = (props) => {
     setFinished(filterBooks("finished"));
   }
 
-  const addBook = (title, author, status) => {
+  const addBook = async (title, author, status) => {
+    const img = await getBookCover(title, author);
     setBooks([
       ...books,
       {
         title,
         author,
         status,
+        img,
         id: uuid(),
       },
     ]);

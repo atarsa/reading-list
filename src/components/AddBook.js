@@ -92,7 +92,7 @@ const AddBook = () => {
     <div>
       <StyledBtn onClick={showOrHide}> Add a book</StyledBtn>
       <StyledModal isOpen={isOpen} onRequestClose={showOrHide}>
-        <StyledForm onSubmit={handleSubmit} autoComplete="off">
+        <StyledForm onSubmit={handleSubmit}>
           <button
             className="button button--close"
             aria-label="Close"
