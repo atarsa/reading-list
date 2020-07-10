@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { BookContext } from "../contexts/BookContext";
-import { useTheme } from "../layout/Layout";
+import ThemeToggler from "../components/ThemeToggler";
+
 const StyledHeader = styled.header`
+  position: relative;
   background: ${(props) => props.theme.primaryColor};
   color: ${(props) => props.theme.secondaryColor};
   margin-bottom: 2rem;
@@ -23,9 +25,16 @@ const StyledHeader = styled.header`
   }
 `;
 
+const TogglerWrapper = styled.div`
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  z-index: 1;
+`;
+
 const Header = () => {
   const { toRead, inProgress, finished } = useContext(BookContext);
-  const themeToggle = useTheme();
+
   return (
     <StyledHeader className="header">
       <div className="container">
@@ -43,7 +52,9 @@ const Header = () => {
           </span>
         </p>
       </div>
-      <button onClick={themeToggle.toggle}>Toggle Theme</button>
+      <TogglerWrapper>
+        <ThemeToggler />
+      </TogglerWrapper>
     </StyledHeader>
   );
 };
