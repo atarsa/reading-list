@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { BookContext } from "../contexts/BookContext";
 import { ReactComponent as BinIcon } from "../images/recycle-bin.svg";
+import StyledModal from "../styles/StyledModal";
 
 const Wrapper = styled.li`
   display: grid;
@@ -42,16 +43,54 @@ const Wrapper = styled.li`
   }
 `;
 
+const StyledDiv = styled.div`
+  background: #eee;
+  color: #333;
+  padding: 5rem;
+  margin: 1rem;
+  border-radius: 3px;
+
+  p {
+    margin-bottom: 4rem;
+  }
+  .book-title {
+    font-weight: 600;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  .btn {
+    padding: 1rem 2rem;
+    border: 1px solid #333;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 2px;
+  }
+
+  .btn__remove {
+    margin-right: 2rem;
+
+    :hover {
+      background: ${(props) => props.theme.additionalColor};
+      border: none;
+      color: #eee;
+    }
+  }
+  .btn__cancel:hover {
+    background: ${(props) => props.theme.primaryColor};
+    border: none;
+    color: #eee;
+  }
+`;
+
 const Book = ({ book }) => {
   const { removeBook, setDraggedBook } = useContext(BookContext);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const handleRemove = (book) => {
-    const confirmation = window.confirm(
-      "Are you sure you want to delete this book?"
-    );
-    if (confirmation) {
-      removeBook(book.id);
-    }
+  const showOrHide = () => {
+    setIsOpen(!isOpen);
   };
 
   const drag = (e, bookToDrag) => {
@@ -65,23 +104,47 @@ const Book = ({ book }) => {
   };
 
   return (
-    <Wrapper
-      draggable="true"
-      id={`drag-book-${book.id}`}
-      onDragStart={(e) => drag(e, book)}
-      data-bookid={book.id}
-    >
-      <img src={book.img} alt="book cover" draggable="false" />
-      <div className="info">
-        <h3>{book.title}</h3>
-        <p>{book.author}</p>
-        <div className="buttons">
-          <button onClick={() => handleRemove(book)}>
-            <BinIcon />
-          </button>
+    <>
+      <Wrapper
+        draggable="true"
+        id={`drag-book-${book.id}`}
+        onDragStart={(e) => drag(e, book)}
+        data-bookid={book.id}
+      >
+        <img src={book.img} alt="book cover" draggable="false" />
+        <div className="info">
+          <h3>{book.title}</h3>
+          <p>{book.author}</p>
+          <div className="buttons">
+            <button onClick={showOrHide}>
+              <BinIcon />
+            </button>
+          </div>
         </div>
-      </div>
-    </Wrapper>
+
+        <StyledModal isOpen={isOpen} onRequestClose={showOrHide}>
+          <StyledDiv>
+            <p>
+              You are about to remove:{" "}
+              <q className="book-title">{book.title}</q> from your list.
+              <br />
+              Do you wish to continue?
+            </p>
+            <div className="buttons">
+              <button
+                className="btn btn__remove"
+                onClick={() => removeBook(book.id)}
+              >
+                Delete
+              </button>
+              <button className="btn btn__cancel" onClick={showOrHide}>
+                Cancel
+              </button>
+            </div>
+          </StyledDiv>
+        </StyledModal>
+      </Wrapper>
+    </>
   );
 };
 

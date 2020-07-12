@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { BookContext } from "../contexts/BookContext";
 import styled from "styled-components";
+import StyledModal from "../styles/StyledModal";
 
-import Modal from "react-modal";
 const StyledForm = styled.form`
   width: 600px;
   padding: 2rem;
@@ -53,25 +53,12 @@ const StyledBtn = styled.button`
   }
 `;
 
-const StyledModal = styled(Modal)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.55);
-`;
 const AddBook = () => {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [status, setStatus] = useState("to read");
   const [isOpen, setIsOpen] = useState(false);
   const { addBook } = useContext(BookContext);
-
-  Modal.setAppElement("#root");
 
   const handleSubmit = (e) => {
     e.preventDefault();
