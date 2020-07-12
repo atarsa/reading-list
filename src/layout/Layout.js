@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { useState, createContext, useContext, useEffect } from "react";
 import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
 import { Normalize } from "styled-normalize";
 import { lightTheme, darkTheme } from "../styles/theme";
@@ -41,14 +41,27 @@ const GlobalStyle = createGlobalStyle`
 `;
 const StyledWrapper = styled.div``;
 const Layout = ({ children }) => {
-  const [isLightTheme, setIsLightTheme] = useState(true);
+  const localTheme = window.localStorage.getItem("reading-list-dark-theme")
+    ? JSON.parse(window.localStorage.getItem("reading-list-dark-theme"))
+    : false;
+
+  const [isDarkTheme, setIsDarkTheme] = useState(localTheme);
 
   const toggle = () => {
-    setIsLightTheme(!isLightTheme)
-  }
-  const theme = isLightTheme ? lightTheme : darkTheme;
+    setIsDarkTheme(!isDarkTheme);
+  };
+
+  useEffect(() => {
+    window.localStorage.setItem(
+      "reading-list-dark-theme",
+      JSON.stringify(isDarkTheme)
+    );
+
+  }, [isDarkTheme]);
+
+  const theme = isDarkTheme ? darkTheme : lightTheme;
   return (
-    <ThemeToggleContext.Provider value={{toggle}}>
+    <ThemeToggleContext.Provider value={{ toggle }}>
       <ThemeProvider theme={theme}>
         <Normalize />
         <GlobalStyle />

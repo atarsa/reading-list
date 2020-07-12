@@ -45,7 +45,7 @@ const Wrapper = styled.div`
     }
   }
 
-  button.right {
+  button.move-right {
     transform: translateX(18px);
   }
 `;
@@ -54,7 +54,7 @@ const ThemeToggler = () => {
   const themeToggle = useTheme();
 
   const handleClick = (e) => {
-    document.getElementById("themeToggler").classList.toggle("right");
+    document.getElementById("themeToggler").classList.toggle("move-right");
     themeToggle.toggle();
   };
 
