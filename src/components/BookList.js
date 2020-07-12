@@ -6,7 +6,7 @@ import Book from "./Book";
 const StyledSection = styled.section`
   background: ${(props) => props.theme.primaryLight};
   margin-bottom: 2rem;
-  
+
   .list-head {
     background: ${(props) => props.theme.primaryColor};
     padding: 0.2rem;
@@ -16,7 +16,6 @@ const StyledSection = styled.section`
     text-align: center;
   }
   .list-body {
-    
     height: 100%;
   }
   ul {
@@ -35,6 +34,9 @@ const BookList = ({ list }) => {
     // update moved book status to the new one
     // update book lists
     updateBooks(draggedBook.id, list);
+    // set opacity back to 1
+    const elId = e.dataTransfer.getData("text");
+    document.getElementById(elId).style.opacity = 1;
   };
 
   const allowDrop = (e) => {

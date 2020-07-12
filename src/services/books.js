@@ -4,7 +4,7 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 
 const getBookCover = async (title, author) => {
   const res = await axios.get(
-    `https://www.googleapis.com/books/v1/volumes?q=${title}+${author}&key=${API_KEY}`,
+    `https://www.googleapis.com/books/v1/volumes?q=intitle:${title}+inauthor:${author}&key=${API_KEY}`,
     {}
   );
   // return img html

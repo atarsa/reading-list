@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
-import { BookContext } from "../contexts/BookContext";
 import styled from "styled-components";
+import { BookContext } from "../contexts/BookContext";
+import { ReactComponent as BinIcon } from "../images/recycle-bin.svg";
 
 const Wrapper = styled.li`
   display: grid;
@@ -11,23 +12,36 @@ const Wrapper = styled.li`
   background: ${(props) => props.theme.primaryLight};
 
   img {
+    width: 115px;
     height: 190px;
     box-shadow: 3px 3px 0px 0px rgba(186, 184, 186, 0.5);
+    background: ${(props) => props.theme.primaryColor};
   }
+
+  .info {
+    display: grid;
+    grid-template-rows: 5rem 7rem 1fr;
+  }
+  .buttons {
+    align-self: end;
+    justify-self: end;
+    svg {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+
   button {
     border: none;
-    background: ${(props) => props.theme.primaryColor};
-    color: ${(props) => props.theme.secondaryColor};
-    font-weight: 600;
-    padding: 0.5rem 2rem;
+    background: none;
+    fill: ${(props) => props.theme.additionalColor};
 
     :hover {
       cursor: pointer;
-      color: #fff;
-      background: ${(props) => props.theme.additionalColor};
     }
   }
 `;
+
 const Book = ({ book }) => {
   const { removeBook, setDraggedBook } = useContext(BookContext);
 
@@ -39,16 +53,17 @@ const Book = ({ book }) => {
       removeBook(book.id);
     }
   };
+
   const drag = (e, bookToDrag) => {
-    console.log("drag");
     setDraggedBook(bookToDrag);
-    // const target = e.target;
-    // e.dataTransfer.setData("text", target.id);
-    // setTimeout(() => {
-    //   target.style.display = "none";
-    // }, 0);
+    // set opacity to dragged book
+    const target = e.target;
+    e.dataTransfer.setData("text", target.id);
+    setTimeout(() => {
+      target.style.opacity = 0.5;
+    }, 0);
   };
-  console.log(book);
+
   return (
     <Wrapper
       draggable="true"
@@ -56,11 +71,15 @@ const Book = ({ book }) => {
       onDragStart={(e) => drag(e, book)}
       data-bookid={book.id}
     >
-      <img src={book.img} alt="book cover" />
-      <div>
+      <img src={book.img} alt="book cover" draggable="false" />
+      <div className="info">
         <h3>{book.title}</h3>
         <p>{book.author}</p>
-        <button onClick={() => handleRemove(book)}>Delete </button>
+        <div className="buttons">
+          <button onClick={() => handleRemove(book)}>
+            <BinIcon />
+          </button>
+        </div>
       </div>
     </Wrapper>
   );
