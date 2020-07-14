@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import { BookContext } from "../contexts/BookContext";
 import Book from "./Book";
@@ -76,6 +77,10 @@ const BookList = ({ list }) => {
       </div>
     </StyledSection>
   );
+};
+
+BookList.propTypes = {
+  list: PropTypes.string.isRequired,
 };
 
 export default BookList;

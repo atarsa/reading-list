@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Modal from "react-modal";
 
 import Layout from "./layout/Layout";
 import BookContextProvider from "./contexts/BookContext";
@@ -45,8 +44,6 @@ const StyledIlustration = styled(Ilustration)`
   }
 `;
 function App() {
-  Modal.setAppElement("#root");
-
   return (
     <Layout>
       <BookContextProvider>

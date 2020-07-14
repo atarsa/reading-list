@@ -78,7 +78,11 @@ const AddBook = () => {
   return (
     <div>
       <StyledBtn onClick={showOrHide}> Add a book</StyledBtn>
-      <StyledModal isOpen={isOpen} onRequestClose={showOrHide}>
+      <StyledModal
+        isOpen={isOpen}
+        onRequestClose={showOrHide}
+        appElement={document.querySelector("#root")}
+      >
         <StyledForm onSubmit={handleSubmit}>
           <button
             className="button button--close"

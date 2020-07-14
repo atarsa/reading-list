@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import { BookContext } from "../contexts/BookContext";
 import { ReactComponent as BinIcon } from "../images/recycle-bin.svg";
@@ -122,7 +123,11 @@ const Book = ({ book }) => {
           </div>
         </div>
 
-        <StyledModal isOpen={isOpen} onRequestClose={showOrHide}>
+        <StyledModal
+          isOpen={isOpen}
+          onRequestClose={showOrHide}
+          appElement={document.querySelector("#root")}
+        >
           <StyledDiv>
             <p>
               You are about to remove:{" "}
@@ -148,4 +153,12 @@ const Book = ({ book }) => {
   );
 };
 
+Book.propTypes = {
+  book: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    img: PropTypes.string.isRequired,
+  }),
+};
 export default Book;
