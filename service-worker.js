@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/atarsa/reading-list/precache-manifest.2bf4555f4ed11d0dbe37ef2a8872b097.js"
+  "/atarsa/reading-list/precache-manifest.491405a0b53ce6272daede4032702f9e.js"
 );
 
 self.addEventListener('message', (event) => {

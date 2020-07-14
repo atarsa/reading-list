@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "fc5fe04509fcec275c6113b68b7bbac9",
+    "revision": "5a0f1a7a8af4bde2ed8becd085611cbf",
     "url": "/atarsa/reading-list/index.html"
   },
   {
-    "revision": "e74208b9dab4211a0e2d",
+    "revision": "23f09a06f2be5a381c42",
     "url": "/atarsa/reading-list/static/css/2.9340ea74.chunk.css"
   },
   {
-    "revision": "e74208b9dab4211a0e2d",
-    "url": "/atarsa/reading-list/static/js/2.c01a085b.chunk.js"
+    "revision": "23f09a06f2be5a381c42",
+    "url": "/atarsa/reading-list/static/js/2.ba179172.chunk.js"
   },
   {
     "revision": "a1a636632721a402612df3e043dd630d",
-    "url": "/atarsa/reading-list/static/js/2.c01a085b.chunk.js.LICENSE.txt"
+    "url": "/atarsa/reading-list/static/js/2.ba179172.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "559a152d8f46d95f5173",
-    "url": "/atarsa/reading-list/static/js/main.88234e4e.chunk.js"
+    "revision": "059d03d6167fbf7795a3",
+    "url": "/atarsa/reading-list/static/js/main.d9595e7a.chunk.js"
   },
   {
     "revision": "81746f962336f13d9ad2",

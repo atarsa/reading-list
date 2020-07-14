@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.js": "/atarsa/reading-list/static/js/main.88234e4e.chunk.js",
-    "main.js.map": "/atarsa/reading-list/static/js/main.88234e4e.chunk.js.map",
+    "main.js": "/atarsa/reading-list/static/js/main.d9595e7a.chunk.js",
+    "main.js.map": "/atarsa/reading-list/static/js/main.d9595e7a.chunk.js.map",
     "runtime-main.js": "/atarsa/reading-list/static/js/runtime-main.c58d364d.js",
     "runtime-main.js.map": "/atarsa/reading-list/static/js/runtime-main.c58d364d.js.map",
     "static/css/2.9340ea74.chunk.css": "/atarsa/reading-list/static/css/2.9340ea74.chunk.css",
-    "static/js/2.c01a085b.chunk.js": "/atarsa/reading-list/static/js/2.c01a085b.chunk.js",
-    "static/js/2.c01a085b.chunk.js.map": "/atarsa/reading-list/static/js/2.c01a085b.chunk.js.map",
+    "static/js/2.ba179172.chunk.js": "/atarsa/reading-list/static/js/2.ba179172.chunk.js",
+    "static/js/2.ba179172.chunk.js.map": "/atarsa/reading-list/static/js/2.ba179172.chunk.js.map",
     "index.html": "/atarsa/reading-list/index.html",
-    "precache-manifest.2bf4555f4ed11d0dbe37ef2a8872b097.js": "/atarsa/reading-list/precache-manifest.2bf4555f4ed11d0dbe37ef2a8872b097.js",
+    "precache-manifest.491405a0b53ce6272daede4032702f9e.js": "/atarsa/reading-list/precache-manifest.491405a0b53ce6272daede4032702f9e.js",
     "service-worker.js": "/atarsa/reading-list/service-worker.js",
     "static/css/2.9340ea74.chunk.css.map": "/atarsa/reading-list/static/css/2.9340ea74.chunk.css.map",
-    "static/js/2.c01a085b.chunk.js.LICENSE.txt": "/atarsa/reading-list/static/js/2.c01a085b.chunk.js.LICENSE.txt",
+    "static/js/2.ba179172.chunk.js.LICENSE.txt": "/atarsa/reading-list/static/js/2.ba179172.chunk.js.LICENSE.txt",
     "static/media/index.css": "/atarsa/reading-list/static/media/oswald-latin-700.c93625b5.woff",
     "static/media/recycle-bin.d733be53.svg": "/atarsa/reading-list/static/media/recycle-bin.d733be53.svg",
     "static/media/undraw_book_lover_mkck.7094e50c.svg": "/atarsa/reading-list/static/media/undraw_book_lover_mkck.7094e50c.svg"
@@ -19,7 +19,7 @@
   "entrypoints": [
     "static/js/runtime-main.c58d364d.js",
     "static/css/2.9340ea74.chunk.css",
-    "static/js/2.c01a085b.chunk.js",
-    "static/js/main.88234e4e.chunk.js"
+    "static/js/2.ba179172.chunk.js",
+    "static/js/main.d9595e7a.chunk.js"
   ]
 }
