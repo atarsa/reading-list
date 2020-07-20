@@ -5,7 +5,6 @@
 - After adding book to any list, it can be later drag-and-drop to another one.
 - The app is fully responsive, created with mobile first approach. The user can also change theme to light/dark.
 - All data is stored in local storage.
-- The app is fully responsive, with mobile first approach.
 
 Live version, hosted on github-pages, can be found here: [Reading-list App](https://atarsa.github.io/reading-list/)
 <br>
